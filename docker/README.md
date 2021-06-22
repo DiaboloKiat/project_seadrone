@@ -5,7 +5,7 @@
 - Build yourself
 
 ```
-$ cd ~/seadrone-project/docker/laptop
+$ cd ~/project_seadrone/docker/laptop
 $ source docker_build.sh
 ```
 
@@ -20,7 +20,7 @@ $
 - Build yourself
 
 ```
-$ cd ~/seadrone-project/docker/nano
+$ cd ~/project_seadrone/docker/nano
 $ source docker_build.sh
 ```
 
