@@ -1,0 +1,44 @@
+cmd "01_core" {
+    exec = "roscore";
+    host = "localhost";
+}
+
+cmd "02_start_seadrone" {
+    exec = "roslaunch seadrone seadrone_start.launch rviz:=false camera:=false veh:=seadrone";
+    host = "localhost";
+}
+
+cmd "03a_camera" {
+    exec = "rosrun seadrone cam.py";
+    host = "localhost";
+}
+
+cmd "03b_mediapipe_hand" {
+    exec = "rosrun seadrone cam_hand.py";
+    host = "localhost";
+}
+
+cmd "03c_hand_gesture" {
+    exec = "rosrun object_detection hand_gesture.py";
+    host = "localhost";
+}
+
+cmd "04_morse_code" {
+    exec = "rosrun seadrone morse_code.py";
+    host = "localhost";
+}
+
+cmd "rviz" {
+    exec = "roslaunch seadrone rviz.launch";
+    host = "localhost";
+}
+
+
+
+script "start_seadrone" 
+{
+    start cmd "01_core" wait "running";
+    wait ms 1500;
+    start cmd "02_start_seadrone" wait "running";
+    wait ms 1500;
+}
