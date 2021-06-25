@@ -31,11 +31,11 @@ echo "--------------------------------------------------------------------------
 # push master
 
 echo "-----------------------------------------------------------------------"
-echo "--------------------------push seadrone_ros----------------------------"
+echo "--------------------------push seadrone_base----------------------------"
 echo "-----------------------------------------------------------------------"
-cd ~/project_seadrone/catkin_ws/src/seadrone_ros
+cd ~/project_seadrone/catkin_ws/src/seadrone_base
 git add -A
-git commit -m "${message} on seadrone_ros"
+git commit -m "${message} on seadrone_base"
 git push
 
 echo "--------------------------------------------------------------------------------"
