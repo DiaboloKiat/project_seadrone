@@ -9,7 +9,7 @@ cmd "02_start_seadrone" {
 }
 
 cmd "03_camera" {
-    exec = "rosrun rpi_ipcam_base cam.py";
+    exec = "roslaunch rpi_ipcam_base open_camera.launch";
     host = "localhost";
 }
 
@@ -18,7 +18,7 @@ cmd "04a_hand_gesture" {
     host = "localhost";
 }
 
-cmd "04a_hand_mediapipe" {
+cmd "04b_hand_mediapipe" {
     exec = "roslaunch hand_gesture mediapipe.launch";
     host = "localhost";
 }
