@@ -38,6 +38,14 @@ git add -A
 git commit -m "${message} on seadrone_base"
 git push
 
+echo "---------------------------------------------------------------------------------------------------"
+echo "--------------------------push hand-gesture-recognition-using-mediapipe----------------------------"
+echo "---------------------------------------------------------------------------------------------------"
+cd ~/project_seadrone/catkin_ws/src/hand-gesture-recognition-using-mediapipe
+git add -A
+git commit -m "${message} on hand-gesture-recognition-using-mediapipe"
+git push origin main
+
 echo "--------------------------------------------------------------------------------"
 echo "---------------------------push project_seadrone--------------------------------"
 echo "--------------------------------------------------------------------------------"
