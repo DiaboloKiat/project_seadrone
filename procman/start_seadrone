@@ -13,6 +13,16 @@ cmd "03_camera" {
     host = "localhost";
 }
 
+cmd "04a_hand_gesture" {
+    exec = "roslaunch hand_gesture hand_gesture.launch";
+    host = "localhost";
+}
+
+cmd "04a_hand_mediapipe" {
+    exec = "roslaunch hand_gesture mediapipe.launch";
+    host = "localhost";
+}
+
 cmd "rviz" {
     exec = "roslaunch rpi_ipcam_base rviz.launch";
     host = "localhost";
