@@ -42,7 +42,7 @@ git pull
 
 CONFLICTS=$(git ls-files -u | wc -l)
 if [ "$CONFLICTS" -gt 0 ] ; then
-   echo "There is conflict in seadrone_base. Aborting"
+   echo "There is conflict in hand-gesture-recognition-using-mediapipe. Aborting"
    return 1
 fi
 
@@ -56,7 +56,7 @@ git pull
 
 CONFLICTS=$(git ls-files -u | wc -l)
 if [ "$CONFLICTS" -gt 0 ] ; then
-   echo "There is conflict in seadrone_base. Aborting"
+   echo "There is conflict in vision_opencv. Aborting"
    return 1
 fi
 
@@ -70,7 +70,7 @@ git pull
 
 CONFLICTS=$(git ls-files -u | wc -l)
 if [ "$CONFLICTS" -gt 0 ] ; then
-   echo "There is conflict in seadrone_base. Aborting"
+   echo "There is conflict in apriltags-ros. Aborting"
    return 1
 fi
 
@@ -83,7 +83,7 @@ git pull
 
 CONFLICTS=$(git ls-files -u | wc -l)
 if [ "$CONFLICTS" -gt 0 ] ; then
-   echo "There is conflict in seadrone_base. Aborting"
+   echo "There is conflict in realsense-ros. Aborting"
    return 1
 fi
 
