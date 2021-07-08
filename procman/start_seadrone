@@ -9,7 +9,7 @@ cmd "02_start_seadrone" {
 }
 
 cmd "03_camera" {
-    exec = "roslaunch rpi_ipcam_base open_camera.launch";
+    exec = "roslaunch rpi_ipcam_base open_camera.launch veh:=seadrone";
     host = "localhost";
 }
 
