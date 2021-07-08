@@ -15,7 +15,7 @@ if [ ! -z "$1" ]; then
 fi
 
 echo "--------------------------------------------------------------------------------"
-source ~/project_seadrone/github/git-pull-master.sh $BRANCH
+source ~/project_seadrone/github/git_pull.sh $BRANCH
 
 PULLSTAT=$?
 if [ "$PULLSTAT" -gt 0 ] ; then
