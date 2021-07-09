@@ -19,7 +19,7 @@ cmd "04a_hand_gesture" {
 }
 
 cmd "04b_hand_mediapipe" {
-    exec = "roslaunch hand_gesture mediapipe.launch";
+    exec = "roslaunch hand_gesture mediapipe.launch veh:=seadrone seadrone:=true;
     host = "localhost";
 }
 
