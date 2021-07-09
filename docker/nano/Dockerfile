@@ -31,28 +31,37 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     g++ \
     tzdata \
     dirmngr \
+    wget \
+    sudo \
+    unzip \
+    gcc-8 g++-8 \
+    ca-certificates \
+    curl \
+    ffmpeg \
+    vim \
+    git \
     lsb-release \
     gnupg2 \
     libpcap-dev \
     libglfw3-dev \
     python3-pip \
+    python3-dev \
+    python3-venv \
     python3-opencv  \
     python3-scipy   \
     python-vcstools \
     python-scipy \
     python-gobject \
     python-gtk2 \
+    protobuf-compiler \
     libcanberra-gtk-module \
     libcanberra-gtk3-module \
-    libfltk1.3-dev \ 
-    freeglut3-dev \ 
-    libpng-dev \ 
-    libjpeg-dev \
-    libxft-dev \ 
-    libxinerama-dev \ 
-    libtiff5-dev \ 
-    netbase \ 
-    fluid \ 
+    libopencv-core-dev \
+    libopencv-highgui-dev \
+    libopencv-imgproc-dev \
+    libopencv-video-dev \
+    libopencv-calib3d-dev \
+    libopencv-features2d-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -109,7 +118,6 @@ RUN pip3 install --upgrade pip setuptools
 RUN pip3 install \
     gym \
     numpy \
-    --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow_gpu==1.14.0+nv19.7 \
     gast==0.2.2 \
     matplotlib \
     pandas \
@@ -130,6 +138,7 @@ RUN pip3 install \
     future \
     six==1.14.0 \
     tf_slim \
+    tensorflow==1.14.0
     imutils \
     scipy
 
@@ -187,7 +196,9 @@ RUN wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_
 
 RUN cd ${HOME} && git clone https://github.com/google/mediapipe.git \
     && cd mediapipe \
-    && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/opencv_linux.BUILD
+    && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/opencv_linux.BUILD \
+    && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/ffmpeg_linux.BUILD \
+    && /setup_opencv.sh
 
 ##################################### Setting #####################################
 
