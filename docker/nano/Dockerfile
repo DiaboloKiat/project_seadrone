@@ -196,6 +196,7 @@ RUN wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_
 
 RUN cd ${HOME} && git clone https://github.com/google/mediapipe.git \
     && cd mediapipe \
+    && pip3 install -r requirements.txt \
     && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/opencv_linux.BUILD \
     && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/ffmpeg_linux.BUILD \
     && /setup_opencv.sh
