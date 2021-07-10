@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/l4t-pytorch:r32.4.2-pth1.5-py3
+FROM nvcr.io/nvidia/l4t-pytorch:r32.5.0-pth1.7-py3
 
 
 ############################ USER ###############################
@@ -22,46 +22,50 @@ RUN echo "${USER}:111111" | chpasswd
 
 ###################################### basic tools #####################################
 
-RUN apt-get update && apt-get install --no-install-recommends -y \
-    libusb-1.0 \
-    gtk+-3.0 \
-    build-essential \
-    make \
+RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -yq dist-upgrade \
+    && apt-get -o Acquire::ForceIPv4=true install -yq --no-install-recommends \
+    locales \
     cmake \
-    g++ \
-    tzdata \
-    dirmngr \
+    make \
+    git \
+    vim \
+    gedit \
     wget \
     sudo \
-    unzip \
-    gcc-8 g++-8 \
-    ca-certificates \
-    curl \
-    ffmpeg \
-    vim \
-    git \
     lsb-release \
+    build-essential \
+    net-tools \
+    dirmngr \
     gnupg2 \
-    libpcap-dev \
-    libglfw3-dev \
-    python3-pip \
-    python3-dev \
-    python3-venv \
-    python3-opencv  \
-    python3-scipy   \
-    python-vcstools \
-    python-scipy \
-    python-gobject \
-    python-gtk2 \
-    protobuf-compiler \
+    mercurial \
+    gtk+-3.0 \
     libcanberra-gtk-module \
     libcanberra-gtk3-module \
-    libopencv-core-dev \
-    libopencv-highgui-dev \
-    libopencv-imgproc-dev \
-    libopencv-video-dev \
-    libopencv-calib3d-dev \
-    libopencv-features2d-dev \
+    libpcap-dev \
+    libusb-1.0 \
+    tzdata \
+    libglfw3-dev \
+    libmetis-dev \
+    python-gtk2 \
+    python-gobject \
+    python-tk \
+    python3-pip \
+    python3-opencv  \
+    python3-numpy \
+    python3-empy  \
+    python3-scipy   \
+    python3-setuptools \
+    python3-empy  \
+    libfltk1.3-dev \ 
+    freeglut3-dev \ 
+    libpng-dev \ 
+    libjpeg-dev \
+    libxft-dev \ 
+    libxinerama-dev \ 
+    libtiff5-dev \ 
+    netbase \ 
+    fluid \ 
+    xterm \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -75,12 +79,13 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6
 ENV ROS_DISTRO melodic
 RUN apt-get update && apt-get install -y \ 
     ros-${ROS_DISTRO}-desktop-full \
-    ros-$ROS_DISTRO-joy \
     ros-$ROS_DISTRO-serial \
     ros-$ROS_DISTRO-soem \
     ros-$ROS_DISTRO-openslam-gmapping \
     ros-$ROS_DISTRO-geodesy \
     ros-$ROS_DISTRO-cartographer-* \
+    ros-$ROS_DISTRO-cartographer-ros \
+    ros-$ROS_DISTRO-cartographer-rviz \
     ros-$ROS_DISTRO-ddynamic-reconfigure \
     ros-$ROS_DISTRO-perception \
     ros-$ROS_DISTRO-rgbd-launch \
@@ -94,6 +99,8 @@ RUN apt-get update && apt-get install -y \
     ros-$ROS_DISTRO-velodyne-simulator \
     ros-$ROS_DISTRO-gazebo-ros \
     ros-$ROS_DISTRO-move-base-msgs \
+    ros-$ROS_DISTRO-hector-gazebo \
+    ros-$ROS_DISTRO-hector-trajectory-server \
     ros-$ROS_DISTRO-lms1xx \
     ros-$ROS_DISTRO-rviz-imu-plugin \
     ros-$ROS_DISTRO-interactive-marker-twist-server \
@@ -116,32 +123,17 @@ RUN rosdep init \
 RUN pip3 install --upgrade pip setuptools
 
 RUN pip3 install \
-    gym \
     numpy \
-    gast==0.2.2 \
-    matplotlib \
+    rospkg \
+    catkin-tools\
+    cython \
+    pandas \
+    image \
+    Pillow \
     pandas \
     pypozyx \
-    requests \
-    jupyter \
-    ipykernel \
-    rospkg \
-    catkin-tools \
-    scikit-image \
-    scikit-learn \
-    zerorpc \
-    cython \
-    lxml \
-    empy  \
-    opencv-python \
-    wheel \
-    future \
-    six==1.14.0 \
-    tf_slim \
-    tensorflow==1.14.0
-    imutils \
-    scipy
-
+    empy \
+    gdown
 ####################################### procman ###########################################
 
 RUN cd ${HOME} && git clone https://github.com/lcm-proj/lcm \
@@ -194,12 +186,12 @@ RUN wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_
 
 ####################################### mediapipe ###########################################
 
-RUN cd ${HOME} && git clone https://github.com/google/mediapipe.git \
-    && cd mediapipe \
-    && pip3 install -r requirements.txt \
-    && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/opencv_linux.BUILD \
-    && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/ffmpeg_linux.BUILD \
-    && /setup_opencv.sh
+# RUN cd ${HOME} && git clone https://github.com/google/mediapipe.git \
+#     && cd mediapipe \
+#     && pip3 install -r requirements.txt \
+#     && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/opencv_linux.BUILD \
+#     && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/ffmpeg_linux.BUILD \
+#     && /setup_opencv.sh
 
 ##################################### Setting #####################################
 
