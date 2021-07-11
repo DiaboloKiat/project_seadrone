@@ -32,6 +32,8 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -yq dist-upgrade \
     gedit \
     wget \
     sudo \
+    unzip \
+    ffmpeg \
     lsb-release \
     build-essential \
     net-tools \
@@ -50,19 +52,51 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -yq dist-upgrade \
     python-gobject \
     python-tk \
     python3-pip \
-    python3-opencv  \
+    python3-opencv \
     python3-numpy \
-    python3-empy  \
-    python3-scipy   \
+    python3-dev \
+    python3-empy \
+    python3-scipy \
     python3-setuptools \
     python3-empy  \
+    protobuf-compiler \
+    pkg-config \
     libfltk1.3-dev \ 
     freeglut3-dev \ 
     libpng-dev \ 
     libjpeg-dev \
     libxft-dev \ 
+    libxvidcore-dev \
+    libx264-dev \
+    libssl-dev \
     libxinerama-dev \ 
-    libtiff5-dev \ 
+    libtiff5-dev \
+    libgtk2.0-dev \
+    libtbb2 \
+    libtbb-dev \
+    libdc1394-22-dev \
+    gstreamer1.0-tools \
+    libv4l-dev \
+    v4l-utils \
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
+    libvorbis-dev \
+    libxine2-dev \
+    libfaac-dev \
+    libmp3lame-dev \
+    libtheora-dev \
+    libopencore-amrnb-dev \
+    libopencore-amrwb-dev \
+    libopenblas-dev \
+    libatlas-base-dev \
+    libblas-dev \
+    liblapack-dev \
+    libeigen3-dev \
+    libhdf5-dev \
+    libprotobuf-dev \
+    libgoogle-glog-dev \
+    libgflags-dev \
+    libavutil-dev \
     netbase \ 
     fluid \ 
     xterm \
@@ -186,12 +220,17 @@ RUN wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_
 
 ####################################### mediapipe ###########################################
 
-# RUN cd ${HOME} && git clone https://github.com/google/mediapipe.git \
-#     && cd mediapipe \
-#     && pip3 install -r requirements.txt \
-#     && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/opencv_linux.BUILD \
-#     && sed -i "s/x86_64-linux-gnu/aarch64-linux-gnu/g" third_party/ffmpeg_linux.BUILD \
-#     && /setup_opencv.sh
+# https://github.com/PINTO0309/mediapipe-bin
+RUN pip3 install pip --upgrade \
+    opencv_contrib_python
+
+RUN cd ${HOME} && git clone https://github.com/PINTO0309/mediapipe-bin \
+    && cd mediapipe-bin
+
+# setup mediapipe
+COPY ./mediapipe-0.8.5_cuda102-cp36-cp36m-linux_aarch64_numpy119x_jetsonnano_L4T32.5.1_download.sh /
+RUN chmod +x /mediapipe-0.8.5_cuda102-cp36-cp36m-linux_aarch64_numpy119x_jetsonnano_L4T32.5.1_download.sh
+ENTRYPOINT ["/mediapipe-0.8.5_cuda102-cp36-cp36m-linux_aarch64_numpy119x_jetsonnano_L4T32.5.1_download.sh"]
 
 ##################################### Setting #####################################
 
