@@ -200,24 +200,6 @@ RUN pip3 install pip --upgrade \
 RUN cd ${HOME} && git clone https://github.com/PINTO0309/mediapipe-bin \
     && cd mediapipe-bin
 
-RUN cd ${HOME} && git clone -b v0.8.4 https://github.com/google/mediapipe \
-    && cd mediapipe \
-
-# $ sed -i -e "/\"imgcodecs\"/d;/\"calib3d\"/d;/\"features2d\"/d;/\"highgui\"/d;/\"video\"/d;/\"videoio\"/d" third_party/BUILD
-# $ sed -i -e "/-ljpeg/d;/-lpng/d;/-ltiff/d;/-lImath/d;/-lIlmImf/d;/-lHalf/d;/-lIex/d;/-lIlmThread/d;/-lrt/d;/-ldc1394/d;/-lavcodec/d;/-lavformat/d;/-lavutil/d;/-lswscale/d;/-lavresample/d" third_party/BUILD
-
-# $ sed -i -e "/^        # Optimization flags/i \        \"ENABLE_NEON\": \"OFF\"," third_party/BUILD
-# $ sed -i -e "/^        # Optimization flags/i \        \"WITH_TENGINE\": \"OFF\"," third_party/BUILD
-
-# $ wget https://github.com/PINTO0309/Bazel_bin/raw/main/3.7.2/aarch64/install.sh
-# $ sudo chmod +x install.sh
-# $ ./install.sh
-
-# $ sudo python3 setup.py gen_protos
-# $ sudo bazel clean --expunge
-# $ sudo python3 setup.py bdist_wheel
-
-
 ##################################### Setting #####################################
 
 RUN chown -R ${USER}:${USER} ${HOME}/
