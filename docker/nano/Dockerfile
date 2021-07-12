@@ -34,6 +34,9 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -yq dist-upgrade \
     sudo \
     unzip \
     ffmpeg \
+    python3-dev \
+    protobuf-compiler \
+    pkg-config \
     lsb-release \
     build-essential \
     net-tools \
@@ -52,51 +55,20 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -yq dist-upgrade \
     python-gobject \
     python-tk \
     python3-pip \
-    python3-opencv \
+    python3-opencv  \
     python3-numpy \
-    python3-dev \
-    python3-empy \
-    python3-scipy \
+    python3-empy  \
+    python3-scipy   \
     python3-setuptools \
     python3-empy  \
-    protobuf-compiler \
-    pkg-config \
     libfltk1.3-dev \ 
     freeglut3-dev \ 
     libpng-dev \ 
     libjpeg-dev \
+    libopencv-dev \
     libxft-dev \ 
-    libxvidcore-dev \
-    libx264-dev \
-    libssl-dev \
     libxinerama-dev \ 
-    libtiff5-dev \
-    libgtk2.0-dev \
-    libtbb2 \
-    libtbb-dev \
-    libdc1394-22-dev \
-    gstreamer1.0-tools \
-    libv4l-dev \
-    v4l-utils \
-    libgstreamer1.0-dev \
-    libgstreamer-plugins-base1.0-dev \
-    libvorbis-dev \
-    libxine2-dev \
-    libfaac-dev \
-    libmp3lame-dev \
-    libtheora-dev \
-    libopencore-amrnb-dev \
-    libopencore-amrwb-dev \
-    libopenblas-dev \
-    libatlas-base-dev \
-    libblas-dev \
-    liblapack-dev \
-    libeigen3-dev \
-    libhdf5-dev \
-    libprotobuf-dev \
-    libgoogle-glog-dev \
-    libgflags-dev \
-    libavutil-dev \
+    libtiff5-dev \ 
     netbase \ 
     fluid \ 
     xterm \
@@ -159,7 +131,7 @@ RUN pip3 install --upgrade pip setuptools
 RUN pip3 install \
     numpy \
     rospkg \
-    catkin-tools\
+    catkin-tools \
     cython \
     pandas \
     image \
@@ -168,6 +140,7 @@ RUN pip3 install \
     pypozyx \
     empy \
     gdown
+
 ####################################### procman ###########################################
 
 RUN cd ${HOME} && git clone https://github.com/lcm-proj/lcm \
@@ -226,6 +199,24 @@ RUN pip3 install pip --upgrade \
 
 RUN cd ${HOME} && git clone https://github.com/PINTO0309/mediapipe-bin \
     && cd mediapipe-bin
+
+RUN cd ${HOME} && git clone -b v0.8.4 https://github.com/google/mediapipe \
+    && cd mediapipe \
+
+# $ sed -i -e "/\"imgcodecs\"/d;/\"calib3d\"/d;/\"features2d\"/d;/\"highgui\"/d;/\"video\"/d;/\"videoio\"/d" third_party/BUILD
+# $ sed -i -e "/-ljpeg/d;/-lpng/d;/-ltiff/d;/-lImath/d;/-lIlmImf/d;/-lHalf/d;/-lIex/d;/-lIlmThread/d;/-lrt/d;/-ldc1394/d;/-lavcodec/d;/-lavformat/d;/-lavutil/d;/-lswscale/d;/-lavresample/d" third_party/BUILD
+
+# $ sed -i -e "/^        # Optimization flags/i \        \"ENABLE_NEON\": \"OFF\"," third_party/BUILD
+# $ sed -i -e "/^        # Optimization flags/i \        \"WITH_TENGINE\": \"OFF\"," third_party/BUILD
+
+# $ wget https://github.com/PINTO0309/Bazel_bin/raw/main/3.7.2/aarch64/install.sh
+# $ sudo chmod +x install.sh
+# $ ./install.sh
+
+# $ sudo python3 setup.py gen_protos
+# $ sudo bazel clean --expunge
+# $ sudo python3 setup.py bdist_wheel
+
 
 ##################################### Setting #####################################
 
