@@ -227,11 +227,6 @@ RUN pip3 install pip --upgrade \
 RUN cd ${HOME} && git clone https://github.com/PINTO0309/mediapipe-bin \
     && cd mediapipe-bin
 
-# setup mediapipe
-COPY ./mediapipe-0.8.5_cuda102-cp36-cp36m-linux_aarch64_numpy119x_jetsonnano_L4T32.5.1_download.sh /
-RUN chmod +x /mediapipe-0.8.5_cuda102-cp36-cp36m-linux_aarch64_numpy119x_jetsonnano_L4T32.5.1_download.sh
-ENTRYPOINT ["/mediapipe-0.8.5_cuda102-cp36-cp36m-linux_aarch64_numpy119x_jetsonnano_L4T32.5.1_download.sh"]
-
 ##################################### Setting #####################################
 
 RUN chown -R ${USER}:${USER} ${HOME}/
