@@ -13,15 +13,18 @@ cmd "03_camera" {
     host = "localhost";
 }
 
-cmd "04a_hand_gesture" {
-    exec = "roslaunch hand_gesture hand_gesture.launch";
-    host = "localhost";
+group "04_hand_detector" {
+    cmd "04a_hand_gesture" {
+        exec = "roslaunch hand_gesture hand_gesture.launch";
+        host = "localhost";
+    }
+
+    cmd "04b_hand_mediapipe" {
+        exec = "roslaunch hand_gesture mediapipe.launch veh:=seadrone seadrone:=true";
+        host = "localhost";
+    }
 }
 
-cmd "04b_hand_mediapipe" {
-    exec = "roslaunch hand_gesture mediapipe.launch veh:=seadrone seadrone:=true";
-    host = "localhost";
-}
 
 cmd "rviz" {
     exec = "roslaunch rpi_ipcam_base rviz.launch";
@@ -33,9 +36,5 @@ cmd "rviz" {
 script "start_seadrone" 
 {
     start cmd "01_core" wait "running";
-    wait ms 1500;
-    start cmd "02_start_seadrone" wait "running";
-    wait ms 1500;
-    start cmd "03_camera" wait "running";
     wait ms 1500;
 }
