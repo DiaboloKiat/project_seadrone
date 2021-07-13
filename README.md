@@ -44,22 +44,36 @@ $ source docker/laptop/docker_join.sh
 ## How to pull or push the repo
 ### git-pull
 ```
-$ source github/git-pull-master.sh
+$ source github/git_pull.sh
 ```
 ### git-push
 ```
-$ source github/git-push-master.sh
+$ source github/git_push.sh
 ```
 - First enter the commit message
 - Second enter the user name and password (**If you have not ssh-key**)
 
+### git-branch
+```
+$ source github/git_branch.sh
+```
+
 ---
 ## How to run Seadrone
-### Start Seadrone
+### Start Seadrone (**Laptop**)
 ```
             $ cd ~/project_seadrone
             $ source docker/laptop/docker_run.sh
-container   $ source catkin_make.sh
+container   $ source docker/laptop/catkin_make.sh
+container   $ source environment.sh
+container   $ source start_seadrone_env.sh
+```
+
+### Start Seadrone (**Nano**)
+```
+            $ cd ~/project_seadrone
+            $ source docker/nano/docker_run.sh
+container   $ source docker/nano/catkin_make.sh
 container   $ source environment.sh
 container   $ source start_seadrone_env.sh
 ```
