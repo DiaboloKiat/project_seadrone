@@ -12,6 +12,7 @@ docker run -it \
   -v "/dev:/dev" \
   -v "/var/run/docker.sock:/var/run/docker.sock" \
   -v "/home/$USER/.bashrc:/home/seadrone/.bashrc" \
+  --workdir "/home/seadrone/project_seadrone" \
   --name project_seadrone \
   --network host \
   --rm \
