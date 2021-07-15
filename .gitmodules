@@ -1,6 +1,8 @@
 [submodule "catkin_ws/src/seadrone_base"]
 	path = catkin_ws/src/seadrone_base
 	url = git@github.com:ARG-NCTU/seadrone_base.git
+	ignore = dirty
 [submodule "catkin_ws/src/hand-gesture-recognition-using-mediapipe"]
 	path = catkin_ws/src/hand-gesture-recognition-using-mediapipe
 	url = git@github.com:DiaboloKiat/hand-gesture-recognition-using-mediapipe.git
+	ignore = dirty

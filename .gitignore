@@ -7,3 +7,5 @@ __pycache__/
 .catkin_workspace
 *.vscode
 *.mp4
+*.pyc
+*.pyo
