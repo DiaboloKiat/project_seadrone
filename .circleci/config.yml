@@ -4,7 +4,6 @@ workflows:
   catkin-make:
     jobs:
       - catkin-make-test-laptop
-      - catkin-make-test-nano
 
 jobs:
   catkin-make-test-laptop:
@@ -17,13 +16,3 @@ jobs:
           command: 
             source /opt/ros/melodic/setup.bash 
             ./docker/laptop/catkin_make.sh
-  catkin-make-test-nano:
-    docker:
-      - image: diabolokiat/seadrone-project:nano
-    steps:
-      - checkout
-      - run:
-          name: catkin make nano
-          command: 
-            source /opt/ros/melodic/setup.bash 
-            ./docker/nano/catkin_make.sh
