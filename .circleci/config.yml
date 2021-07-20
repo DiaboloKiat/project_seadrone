@@ -1,0 +1,20 @@
+version: 2.1
+
+workflows:
+  catkin-make:
+    jobs:
+      - catkin-make-test
+
+
+jobs:
+  catkin-make-test:
+    docker:
+      - image: diabolokiat/seadrone-project:laptop
+    steps:
+      - checkout
+      - python/install-packages:
+      - run:
+          name: catkin make
+          command: 
+            source /opt/ros/melodic/setup.bash 
+            ./docker/laptop/catkin_make.sh
