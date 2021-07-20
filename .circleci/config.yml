@@ -12,7 +12,6 @@ jobs:
       - image: diabolokiat/seadrone-project:laptop
     steps:
       - checkout
-      - python/install-packages:
       - run:
           name: catkin make
           command: 
