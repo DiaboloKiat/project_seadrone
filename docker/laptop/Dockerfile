@@ -168,16 +168,6 @@ RUN cd ${HOME} && git clone https://github.com/DiaboloKiat/procman \
     && cmake .. \
     && make install
 
-####################################### Install bazel ###########################################
-
-ARG BAZEL_VERSION=3.7.2
-RUN cd ${HOME} && mkdir /bazel \
-    && wget --no-check-certificate -O /bazel/installer.sh "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh" \
-    && wget --no-check-certificate -O  /bazel/LICENSE.txt "https://raw.githubusercontent.com/bazelbuild/bazel/master/LICENSE" \
-    && chmod +x /bazel/installer.sh \
-    && /bazel/installer.sh \
-    && rm -f /bazel/installer.sh
-
 ######################################## realsense ########################################
 
 RUN apt-get update && apt-get install -y \
@@ -202,6 +192,16 @@ RUN wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_
     make install && \
     rm -rf librealsense-${LIBREALSENSE_VERSION}
 
+####################################### Install bazel ###########################################
+
+ARG BAZEL_VERSION=3.7.2
+RUN cd ${HOME} && mkdir /bazel \
+    && wget --no-check-certificate -O /bazel/installer.sh "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh" \
+    && wget --no-check-certificate -O  /bazel/LICENSE.txt "https://raw.githubusercontent.com/bazelbuild/bazel/master/LICENSE" \
+    && chmod +x /bazel/installer.sh \
+    && /bazel/installer.sh \
+    && rm -f /bazel/installer.sh
+
 ####################################### mediapipe ###########################################
 
 RUN cd ${HOME} && git clone https://github.com/google/mediapipe.git
@@ -211,9 +211,7 @@ RUN cd ${HOME} && git clone https://github.com/google/mediapipe.git
 ##################################### Setting #####################################
 
 RUN chown -R ${USER}:${USER} ${HOME}/
-RUN echo "seadrone ALL=(ALL)  ALL" > /etc/sudoers
-
-RUN echo "cd ~/project_seadrone" >> ${HOME}/.bashrc
+RUN echo "${USER} ALL=(ALL)  ALL" > /etc/sudoers
 
 # Support of nvidia-docker 2.0
 ENV NVIDIA_VISIBLE_DEVICES=all
@@ -228,3 +226,4 @@ ENTRYPOINT ["/ros_entrypoint.sh"]
 USER ${USER}
 
 WORKDIR ${HOME}
+CMD ["bash"]

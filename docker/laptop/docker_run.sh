@@ -40,7 +40,7 @@ else
 fi
 
 docker run -it \
-  -e DISPLAY \
+  -e DISPLAY=$DISPLAY \
   -e QT_X11_NO_MITSHM=1 \
   -e XAUTHORITY=$XAUTH \
   -v "$XAUTH:$XAUTH" \
@@ -51,7 +51,8 @@ docker run -it \
   -v "/var/run/docker.sock:/var/run/docker.sock" \
   -v "/home/$USER/.bashrc:/home/seadrone/.bashrc" \
   --workdir "/home/seadrone/project_seadrone" \
-  --name project_seadrone \
+  --user "root:root" \
+  --name seadrone \
   --network host \
   --rm \
   $DOCKER_OPTS \
