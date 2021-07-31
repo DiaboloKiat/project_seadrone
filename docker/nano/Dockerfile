@@ -32,11 +32,6 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -yq dist-upgrade \
     gedit \
     wget \
     sudo \
-    unzip \
-    ffmpeg \
-    python3-dev \
-    protobuf-compiler \
-    pkg-config \
     lsb-release \
     build-essential \
     net-tools \
@@ -60,12 +55,12 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -yq dist-upgrade \
     python3-empy  \
     python3-scipy   \
     python3-setuptools \
-    python3-empy  \
+    python3-dev \
+    python3-yaml \
     libfltk1.3-dev \ 
     freeglut3-dev \ 
     libpng-dev \ 
     libjpeg-dev \
-    libopencv-dev \
     libxft-dev \ 
     libxinerama-dev \ 
     libtiff5-dev \ 
@@ -113,6 +108,7 @@ RUN apt-get update && apt-get install -y \
     ros-$ROS_DISTRO-teleop-twist-joy \
     ros-$ROS_DISTRO-rosserial-arduino \
     ros-$ROS_DISTRO-rosserial \
+    ros-$ROS_DISTRO-cv-bridge \
     python-rosdep \
     python-rosinstall \
     python-rosinstall-generator \
@@ -131,7 +127,7 @@ RUN pip3 install --upgrade pip setuptools
 RUN pip3 install \
     numpy \
     rospkg \
-    catkin-tools \
+    catkin-tools\
     cython \
     pandas \
     image \
@@ -139,7 +135,7 @@ RUN pip3 install \
     pandas \
     pypozyx \
     empy \
-    gdown
+    gdown 
 
 ####################################### procman ###########################################
 
@@ -156,16 +152,6 @@ RUN cd ${HOME} && git clone https://github.com/DiaboloKiat/procman \
     && cd build \
     && cmake .. \
     && make install
-
-####################################### Install bazel ###########################################
-
-ARG BAZEL_VERSION=3.7.2
-RUN cd ${HOME} && mkdir /bazel \
-    && wget --no-check-certificate -O /bazel/installer.sh "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-linux-x86_64.sh" \
-    && wget --no-check-certificate -O  /bazel/LICENSE.txt "https://raw.githubusercontent.com/bazelbuild/bazel/master/LICENSE" \
-    && chmod +x /bazel/installer.sh \
-    && /bazel/installer.sh \
-    && rm -f /bazel/installer.sh
 
 ######################################## realsense ########################################
 
@@ -191,21 +177,30 @@ RUN wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_
     make install && \
     rm -rf librealsense-${LIBREALSENSE_VERSION}
 
-####################################### mediapipe ###########################################
+####################################### Install bazel ###########################################
 
-# https://github.com/PINTO0309/mediapipe-bin
-RUN pip3 install pip --upgrade \
-    opencv_contrib_python
+RUN pip3 install six
+RUN pip3 install setuptools Cython wheel
+RUN pip3 install numpy --verbose
+RUN pip3 install h5py==2.10.0 --verbose
+RUN pip3 install future==0.18.2 mock==3.0.5 h5py==2.10.0 keras_preprocessing==1.1.1 keras_applications==1.0.8 gast==0.2.2 futures protobuf pybind11 --verbose
 
-RUN cd ${HOME} && git clone https://github.com/PINTO0309/mediapipe-bin \
-    && cd mediapipe-bin
+ARG BAZEL_VERSION=3.7.1
+RUN cd ${HOME} && mkdir /bazel \
+    && cd /bazel \
+    && wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-dist.zip \
+    && apt-get install python3 zip unzip g++ zlib1g-dev \
+    && add-apt-repository ppa:webupd8team/java -y \
+    && apt-get update -y \
+    && apt install openjdk-11-jdk -y \
+    && unzip bazel-${BAZEL_VERSION}-dist.zip \
+    && env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh \
+    && cp /bazel/output/bazel /usr/local/bin/
 
 ##################################### Setting #####################################
 
 RUN chown -R ${USER}:${USER} ${HOME}/
-RUN echo "seadrone ALL=(ALL)  ALL" > /etc/sudoers
-
-RUN echo "cd ~/project_seadrone" >> ${HOME}/.bashrc
+RUN echo "${USER} ALL=(ALL)  ALL" > /etc/sudoers
 
 # Support of nvidia-docker 2.0
 ENV NVIDIA_VISIBLE_DEVICES=all
@@ -219,4 +214,4 @@ ENTRYPOINT ["/ros_entrypoint.sh"]
 USER ${USER}
 
 WORKDIR ${HOME}
-
+CMD ["bash"]
