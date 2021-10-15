@@ -2,11 +2,11 @@
 
 git checkout master
 
-cd ~/project_seadrone/catkin_ws/src/seadrone_base
-git checkout master
-
 cd ~/project_seadrone/catkin_ws/src/hand-gesture-recognition-using-mediapipe
 git checkout main
+
+cd ~/project_seadrone/catkin_ws/src/seadrone_base
+git checkout master
 
 cd ~/project_seadrone/catkin_ws/src/seadrone_base/sensors/vision_opencv
 git checkout melodic
