@@ -60,20 +60,6 @@ if [ "$CONFLICTS" -gt 0 ] ; then
    return 1
 fi
 
-BRANCH=indigo-devel
-echo "---------------------------------------------------------------------------------------------------"
-echo "-------------------------------------pull apriltags-ros--------------------------------------------"
-echo "---------------------------------------------------------------------------------------------------"
-cd ~/project_seadrone/catkin_ws/src/seadrone_base/sensors/apriltags-ros
-git checkout $BRANCH
-git pull
-
-CONFLICTS=$(git ls-files -u | wc -l)
-if [ "$CONFLICTS" -gt 0 ] ; then
-   echo "There is conflict in apriltags-ros. Aborting"
-   return 1
-fi
-
 echo "---------------------------------------------------------------------------------------------------"
 echo "-------------------------------------pull realsense-ros--------------------------------------------"
 echo "---------------------------------------------------------------------------------------------------"
@@ -84,6 +70,20 @@ git pull
 CONFLICTS=$(git ls-files -u | wc -l)
 if [ "$CONFLICTS" -gt 0 ] ; then
    echo "There is conflict in realsense-ros. Aborting"
+   return 1
+fi
+
+BRANCH=indigo-devel
+echo "---------------------------------------------------------------------------------------------------"
+echo "-------------------------------------pull apriltags-ros--------------------------------------------"
+echo "---------------------------------------------------------------------------------------------------"
+cd ~/project_seadrone/catkin_ws/src/seadrone_base/sensors/apriltags_ros
+git checkout $BRANCH
+git pull
+
+CONFLICTS=$(git ls-files -u | wc -l)
+if [ "$CONFLICTS" -gt 0 ] ; then
+   echo "There is conflict in apriltags-ros. Aborting"
    return 1
 fi
 

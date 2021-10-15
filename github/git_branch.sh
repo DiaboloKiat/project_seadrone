@@ -11,7 +11,7 @@ git checkout master
 cd ~/project_seadrone/catkin_ws/src/seadrone_base/sensors/vision_opencv
 git checkout melodic
 
-cd ~/project_seadrone/catkin_ws/src/seadrone_base/sensors/apriltags-ros
+cd ~/project_seadrone/catkin_ws/src/seadrone_base/sensors/apriltags_ros
 git checkout indigo-devel
 
 cd ~/project_seadrone/catkin_ws/src/seadrone_base/sensors/realsense-ros
