@@ -137,6 +137,15 @@ RUN pip3 install \
     empy \
     gdown 
 
+##################################### PIP2 ######################################
+RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py \
+    && python2 get-pip.py
+
+RUN pip2 install --upgrade pip setuptools
+
+RUN pip2 install \
+    scipy
+
 ####################################### procman ###########################################
 
 RUN cd ${HOME} && git clone https://github.com/lcm-proj/lcm \
