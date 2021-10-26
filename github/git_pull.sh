@@ -88,5 +88,21 @@ if [ "$CONFLICTS" -gt 0 ] ; then
    return 1
 fi
 
+BRANCH=devel-kiat
+echo "---------------------------------------------------------------------------------------------------"
+echo "-------------------------------------pull pozyx_ros------------------------------------------------"
+echo "---------------------------------------------------------------------------------------------------"
+cd ~/project_seadrone/catkin_ws/src/pozyx_ros
+git checkout $BRANCH
+git pull
+
+CONFLICTS=$(git ls-files -u | wc -l)
+if [ "$CONFLICTS" -gt 0 ] ; then
+   echo "There is conflict in pozyx_ros. Aborting"
+   return 1
+fi
+
+
+
 cd ~/project_seadrone
 return 0

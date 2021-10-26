@@ -5,6 +5,9 @@ git checkout master
 cd ~/project_seadrone/catkin_ws/src/hand-gesture-recognition-using-mediapipe
 git checkout main
 
+cd ~/project_seadrone/catkin_ws/src/pozyx_ros
+git checkout devel-kiat
+
 cd ~/project_seadrone/catkin_ws/src/seadrone_base
 git checkout master
 
