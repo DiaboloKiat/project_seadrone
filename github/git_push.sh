@@ -8,19 +8,29 @@ git checkout master
 echo "Enter your message"
 read message
 
-BRANCH=master
-if [ ! -z "$1" ]; then
-    echo "operator on branch: $1"
-    BRANCH=$1
+if [ "$1" = "base" ]
+then
+    PROJECT=project_seadrone
+    REPO=project_seadrone
+else
+    echo "Please enter your project"
+    return 0
 fi
 
+BRANCH=master
 echo "---------------------------------------------------------------------------------------------------"
-source ~/project_seadrone/github/git_pull.sh $BRANCH
+source ~/$REPO/github/git_branch.sh $1
+pwd
+echo "$REPO"
+echo "---------------------------------------------------------------------------------------------------"
+source ~/$REPO/github/git_pull.sh $1
+pwd
 
 PULLSTAT=$?
-if [ "$PULLSTAT" -gt 0 ] ; then
+if [ "$PULLSTAT" -gt 0 ]
+then
    echo "There is conflict. Aborting"
-   cd $cur_path/
+   cd ~/$REPO
    return
 fi
 echo "---------------------------------------------------------------------------------------------------"
@@ -33,31 +43,32 @@ echo "--------------------------------------------------------------------------
 echo "---------------------------------------------------------------------------------------------------"
 echo "--------------------------push hand-gesture-recognition-using-mediapipe----------------------------"
 echo "---------------------------------------------------------------------------------------------------"
-cd ~/project_seadrone/catkin_ws/src/hand-gesture-recognition-using-mediapipe
+cd ~/$REPO/catkin_ws/src/hand-gesture-recognition-using-mediapipe
 git add -A
 git commit -m "${message} on hand-gesture-recognition-using-mediapipe"
 git push origin main
 
 echo "---------------------------------------------------------------------------------------------------"
-echo "------------------------------------------push seadrone_base---------------------------------------"
-echo "---------------------------------------------------------------------------------------------------"
-cd ~/project_seadrone/catkin_ws/src/seadrone_base
-git add -A
-git commit -m "${message} on seadrone_base"
-git push
-
-echo "---------------------------------------------------------------------------------------------------"
 echo "------------------------------------------push pozyx_ros-------------------------------------------"
 echo "---------------------------------------------------------------------------------------------------"
-cd ~/project_seadrone/catkin_ws/src/pozyx_ros
+cd ~/$REPO/catkin_ws/src/pozyx_ros
 git add -A
 git commit -m "${message} on pozyx_ros"
 git push origin devel-kiat
 
+echo "---------------------------------------------------------------------------------------------------"
+echo "------------------------------------------push seadrone_base---------------------------------------"
+echo "---------------------------------------------------------------------------------------------------"
+source ~/$REPO/catkin_ws/src/seadrone_base/github/git_push.sh project_seadrone
+
+
 echo "----------------------------------------------------------------------------------------------------"
 echo "--------------------------------------push project_seadrone-----------------------------------------"
 echo "----------------------------------------------------------------------------------------------------"
-cd ~/project_seadrone/
+cd ~/$REPO
 git add -A
 git commit -m "${message} on project_seadrone"
 git push
+
+
+cd ~/$REPO

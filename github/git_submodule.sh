@@ -1,6 +1,15 @@
 #!/bin/bash
 
-cd ~/project_seadrone
+if [ "$1" = "base" ]
+then
+    PROJECT=~/project_seadrone
+    HOME=~/project_seadrone
+else
+    echo "Please enter your project"
+    return 0
+fi
+
+cd $PROJECT
 git submodule init
 git submodule update --recursive
 
@@ -8,7 +17,7 @@ git submodule update --recursive
 echo "--------------------------------------------------------"
 echo "------------------seadrone_base-------------------------"
 echo "--------------------------------------------------------"
-cd ~/project_seadrone/catkin_ws/src/seadrone_base
+cd $PROJECT/catkin_ws/src/seadrone_base
 git submodule init
 git submodule update --recursive
 
