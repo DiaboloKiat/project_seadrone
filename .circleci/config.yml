@@ -13,8 +13,6 @@ jobs:
       - run:
           name: catkin make laptop
           command: 
-            ./github/git_submodule.sh base
-            ./github/git_pull.sh base
             source /opt/ros/melodic/setup.bash 
             ./docker/laptop/catkin_make.sh
             ./environment.sh
