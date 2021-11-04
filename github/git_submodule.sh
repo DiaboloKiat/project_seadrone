@@ -21,5 +21,12 @@ cd $PROJECT/catkin_ws/src/seadrone_base
 git submodule init
 git submodule update --recursive
 
+echo "--------------------------------------------------------"
+echo "------------------duckieboat_base-----------------------"
+echo "--------------------------------------------------------"
+cd $PROJECT/catkin_ws/src/duckieboat_base
+git submodule init
+git submodule update --recursive
+
 echo "------------------update submodule----------------------"
 

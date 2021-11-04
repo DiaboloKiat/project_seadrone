@@ -56,6 +56,7 @@ fi
 
 source ~/$REPO/catkin_ws/src/seadrone_base/github/git_pull.sh project_seadrone
 
+source ~/$REPO/catkin_ws/src/duckieboat_base/github/git_pull.sh project_seadrone
 
 cd ~/$REPO
 return 0

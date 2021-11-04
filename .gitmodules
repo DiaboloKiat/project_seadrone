@@ -10,3 +10,6 @@
 	path = catkin_ws/src/pozyx_ros
 	url = git@github.com:ARG-NCTU/pozyx_uwb.git
 	ignore = dirty
+[submodule "catkin_ws/src/duckieboat_base"]
+	path = catkin_ws/src/duckieboat_base
+	url = git@github.com:DiaboloKiat/duckieboat_base.git
