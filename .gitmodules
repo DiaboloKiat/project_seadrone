@@ -13,3 +13,4 @@
 [submodule "catkin_ws/src/duckieboat_base"]
 	path = catkin_ws/src/duckieboat_base
 	url = git@github.com:DiaboloKiat/duckieboat_base.git
+	ignore = dirty
