@@ -10,6 +10,7 @@ jobs:
     docker:
       - image: diabolokiat/seadrone-project:laptop
     steps:
+      - checkout
       - run:
           name: catkin make laptop
           command: 
