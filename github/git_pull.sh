@@ -45,7 +45,7 @@ echo "-------------------------------------pull pozyx_ros-----------------------
 echo "---------------------------------------------------------------------------------------------------"
 cd ~/$REPO/catkin_ws/src/pozyx_ros
 git checkout $BRANCH
-git pull
+git pull origin $BRANCH
 
 CONFLICTS=$(git ls-files -u | wc -l)
 if [ "$CONFLICTS" -gt 0 ]
