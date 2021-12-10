@@ -74,7 +74,7 @@ echo "--------------------------------------------------------------------------
 cd ~/$REPO
 git add -A
 git commit -m "${message} on project_seadrone"
-git push
+git push origin $BRANCH
 
 
 cd ~/$REPO
