@@ -47,6 +47,7 @@ cd ~/$REPO/catkin_ws/src/hand-gesture-recognition-using-mediapipe
 git add -A
 git commit -m "${message} on hand-gesture-recognition-using-mediapipe"
 git push origin main
+cd ~/$REPO
 
 # echo "---------------------------------------------------------------------------------------------------"
 # echo "------------------------------------------push pozyx_ros-------------------------------------------"
@@ -55,6 +56,7 @@ git push origin main
 # git add -A
 # git commit -m "${message} on pozyx_ros"
 # git push origin devel-kiat
+# cd ~/$REPO
 
 echo "---------------------------------------------------------------------------------------------------"
 echo "------------------------------------------push seadrone_base---------------------------------------"
@@ -74,7 +76,7 @@ echo "--------------------------------------------------------------------------
 cd ~/$REPO
 git add -A
 git commit -m "${message} on project_seadrone"
-git push origin $BRANCH
+git push
 
 
 cd ~/$REPO
