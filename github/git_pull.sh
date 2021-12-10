@@ -39,20 +39,20 @@ then
    return 1
 fi
 
-BRANCH=devel-kiat
-echo "---------------------------------------------------------------------------------------------------"
-echo "-------------------------------------pull pozyx_ros------------------------------------------------"
-echo "---------------------------------------------------------------------------------------------------"
-cd ~/$REPO/catkin_ws/src/pozyx_ros
-git checkout $BRANCH
-git pull origin $BRANCH
+# BRANCH=devel-kiat
+# echo "---------------------------------------------------------------------------------------------------"
+# echo "-------------------------------------pull pozyx_ros------------------------------------------------"
+# echo "---------------------------------------------------------------------------------------------------"
+# cd ~/$REPO/catkin_ws/src/pozyx_ros
+# git checkout $BRANCH
+# git pull origin $BRANCH
 
-CONFLICTS=$(git ls-files -u | wc -l)
-if [ "$CONFLICTS" -gt 0 ]
-then
-   echo "There is conflict in pozyx_ros. Aborting"
-   return 1
-fi
+# CONFLICTS=$(git ls-files -u | wc -l)
+# if [ "$CONFLICTS" -gt 0 ]
+# then
+#    echo "There is conflict in pozyx_ros. Aborting"
+#    return 1
+# fi
 
 source ~/$REPO/catkin_ws/src/seadrone_base/github/git_pull.sh project_seadrone
 cd ~/$REPO
