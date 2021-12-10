@@ -9,21 +9,6 @@ else
     return 0
 fi
 
-BRANCH=master
-echo "---------------------------------------------------------------------------------------------------"
-echo "------------------------------------pull project_seadrone------------------------------------------"
-echo "---------------------------------------------------------------------------------------------------"
-cd ~/$REPO
-git checkout $BRANCH
-git pull
-
-CONFLICTS=$(git ls-files -u | wc -l)
-if [ "$CONFLICTS" -gt 0 ]
-then
-   echo "There is conflict in project_seadrone. Aborting"
-   return 1
-fi
-
 BRANCH=main
 echo "---------------------------------------------------------------------------------------------------"
 echo "--------------------------pull hand-gesture-recognition-using-mediapipe----------------------------"
@@ -59,6 +44,23 @@ cd ~/$REPO
 
 source ~/$REPO/catkin_ws/src/duckieboat_base/github/git_pull.sh project_seadrone
 cd ~/$REPO
+
+BRANCH=master
+echo "---------------------------------------------------------------------------------------------------"
+echo "------------------------------------pull project_seadrone------------------------------------------"
+echo "---------------------------------------------------------------------------------------------------"
+cd ~/$REPO
+git checkout $BRANCH
+git pull
+
+CONFLICTS=$(git ls-files -u | wc -l)
+if [ "$CONFLICTS" -gt 0 ]
+then
+   echo "There is conflict in project_seadrone. Aborting"
+   return 1
+fi
+
+
 
 cd ~/$REPO
 return 0
